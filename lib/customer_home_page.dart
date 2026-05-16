@@ -51,14 +51,16 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
     showMessage('تمت إضافة المنتج للسلة');
   }
 
-  void incrementQuantity(int index, void Function(void Function()) setModalState) {
+  void incrementQuantity(
+      int index, void Function(void Function()) setModalState) {
     setState(() {
       cart[index]['quantity']++;
     });
     setModalState(() {});
   }
 
-  void decrementQuantity(int index, void Function(void Function()) setModalState) {
+  void decrementQuantity(
+      int index, void Function(void Function()) setModalState) {
     setState(() {
       if (cart[index]['quantity'] > 1) {
         cart[index]['quantity']--;
@@ -163,7 +165,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                           ? const Center(child: Text('السلة فارغة'))
                           : ListView.separated(
                               itemCount: cart.length,
-                              separatorBuilder: (context, index) => const SizedBox(height: 12),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(height: 12),
                               itemBuilder: (context, index) {
                                 final item = cart[index];
                                 return Container(
@@ -171,7 +174,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(color: Colors.grey.shade200),
+                                    border:
+                                        Border.all(color: Colors.grey.shade200),
                                   ),
                                   child: Row(
                                     children: [
@@ -181,16 +185,20 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                         height: 80,
                                         decoration: BoxDecoration(
                                           color: const Color(0xFFF5F5F5),
-                                          borderRadius: BorderRadius.circular(8),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
                                         padding: const EdgeInsets.all(8),
-                                        child: productImage(item['imageUrl'] ?? '', height: 64),
+                                        child: productImage(
+                                            item['imageUrl'] ?? '',
+                                            height: 64),
                                       ),
                                       const SizedBox(width: 12),
                                       // Center: Details
                                       Expanded(
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               item['name'],
@@ -215,32 +223,58 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 InkWell(
-                                                  onTap: () => decrementQuantity(index, setModalState),
+                                                  onTap: () =>
+                                                      decrementQuantity(
+                                                          index, setModalState),
                                                   child: Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 2),
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(color: Colors.grey.shade300),
-                                                      borderRadius: BorderRadius.circular(4),
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .grey.shade300),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
                                                     ),
-                                                    child: const Text('-', style: TextStyle(fontSize: 16)),
+                                                    child: const Text('-',
+                                                        style: TextStyle(
+                                                            fontSize: 16)),
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 12),
                                                   child: Text(
                                                     '${item['quantity']}',
-                                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                                    style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
                                                 InkWell(
-                                                  onTap: () => incrementQuantity(index, setModalState),
+                                                  onTap: () =>
+                                                      incrementQuantity(
+                                                          index, setModalState),
                                                   child: Container(
-                                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 8,
+                                                        vertical: 2),
                                                     decoration: BoxDecoration(
-                                                      border: Border.all(color: Colors.grey.shade300),
-                                                      borderRadius: BorderRadius.circular(4),
+                                                      border: Border.all(
+                                                          color: Colors
+                                                              .grey.shade300),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
                                                     ),
-                                                    child: const Text('+', style: TextStyle(fontSize: 16)),
+                                                    child: const Text('+',
+                                                        style: TextStyle(
+                                                            fontSize: 16)),
                                                   ),
                                                 ),
                                               ],
@@ -250,8 +284,10 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                                       ),
                                       // Left: Delete
                                       IconButton(
-                                        icon: const Icon(Icons.delete_outline, color: Colors.red),
-                                        onPressed: () => removeFromCart(index, setModalState),
+                                        icon: const Icon(Icons.delete_outline,
+                                            color: Colors.red),
+                                        onPressed: () => removeFromCart(
+                                            index, setModalState),
                                       ),
                                     ],
                                   ),
@@ -266,7 +302,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       children: [
                         const Text(
                           'الإجمالي: ',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           '${getTotal().toStringAsFixed(0)} ريال',
@@ -283,12 +320,15 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                     // Form Fields
                     _buildTextField('اسم العميل', 'أدخل اسمك', nameController),
                     const SizedBox(height: 12),
-                    _buildTextField('رقم الهاتف', 'أدخل رقم هاتفك', phoneController, isPhone: true),
+                    _buildTextField(
+                        'رقم الهاتف', 'أدخل رقم هاتفك', phoneController,
+                        isPhone: true),
                     const SizedBox(height: 12),
-                    _buildTextField('العنوان', 'أدخل عنوانك', addressController),
-                    
+                    _buildTextField(
+                        'العنوان', 'أدخل عنوانك', addressController),
+
                     const SizedBox(height: 24),
-                    
+
                     // Submit Button
                     SizedBox(
                       width: double.infinity,
@@ -306,11 +346,13 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                         icon: const Icon(Icons.send, size: 20),
                         label: const Text(
                           'إرسال الطلب',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
-                    SizedBox(height: MediaQuery.of(context).viewInsets.bottom + 16),
+                    SizedBox(
+                        height: MediaQuery.of(context).viewInsets.bottom + 16),
                   ],
                 ),
               ),
@@ -321,7 +363,109 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
     );
   }
 
-  Widget _buildTextField(String label, String hint, TextEditingController controller, {bool isPhone = false}) {
+  Color getStatusColor(String status) {
+    switch (status) {
+      case 'جديد':
+        return Colors.teal;
+      case 'مقبول':
+        return Colors.blue;
+      case 'جاري التحضير':
+        return Colors.orange;
+      case 'تم التسليم':
+        return Colors.green;
+      case 'مرفوض':
+        return Colors.red;
+      default:
+        return Colors.grey;
+    }
+  }
+
+  void showMyOrdersSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (_) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 0.8,
+          child: StreamBuilder<QuerySnapshot>(
+            stream: firestore
+                .collection('orders')
+                .orderBy('createdAt', descending: true)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return const Center(child: Text('حدث خطأ في تحميل الطلبات'));
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final orders = snapshot.data!.docs;
+
+              if (orders.isEmpty) {
+                return const Center(child: Text('لا توجد طلبات حالياً'));
+              }
+
+              return ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  const Text(
+                    'تتبع طلباتي',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 16),
+                  ...orders.map((doc) {
+                    final data = doc.data() as Map<String, dynamic>;
+                    final status = data['status'] ?? 'جديد';
+                    final total = data['total'] ?? 0;
+                    final items = data['items'] as List? ?? [];
+
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'حالة الطلب: $status',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: getStatusColor(status),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text('الإجمالي: $total ريال'),
+                            const Divider(),
+                            const Text(
+                              'المنتجات:',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            ...items.map((item) {
+                              return Text(
+                                '- ${item['name']} | الكمية: ${item['quantity']}',
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildTextField(
+      String label, String hint, TextEditingController controller,
+      {bool isPhone = false}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -336,7 +480,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: Colors.grey.shade400, fontSize: 14),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             filled: true,
             fillColor: Colors.white,
             border: OutlineInputBorder(
@@ -385,7 +530,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 0,
-        title: const Text('متجر العميل', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text('متجر العميل',
+            style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.menu),
@@ -397,6 +543,11 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
               await FirebaseAuth.instance.signOut();
             },
             icon: const Icon(Icons.logout),
+          ),
+          IconButton(
+            onPressed: showMyOrdersSheet,
+            icon: const Icon(Icons.receipt_long),
+            tooltip: 'تتبع الطلب',
           ),
           Stack(
             alignment: Alignment.center,
@@ -431,7 +582,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator(color: primaryColor));
+            return Center(
+                child: CircularProgressIndicator(color: primaryColor));
           }
 
           final products = snapshot.data!.docs;
@@ -473,7 +625,8 @@ class _CustomerHomePageState extends State<CustomerHomePage> {
                       child: Container(
                         decoration: const BoxDecoration(
                           color: Color(0xFFF5F5F5),
-                          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(12)),
                         ),
                         padding: const EdgeInsets.all(16),
                         child: Center(
